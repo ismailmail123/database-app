@@ -15,10 +15,14 @@ module.exports = (sequelize, DataTypes) => {
                 foreigenkey: "progress_id",
                 as: "progress"
             })
+            user.hasMany(models.kelas, {
+                foreignKey: "user_id",
+                as: "kelas"
+            })
         }
     }
     user.init({
-        name: DataTypes.STRING,
+        nama: DataTypes.STRING,
         email: DataTypes.STRING,
         password: DataTypes.STRING
     }, {

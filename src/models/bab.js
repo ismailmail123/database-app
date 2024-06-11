@@ -16,13 +16,13 @@ module.exports = (sequelize, DataTypes) => {
                 as: "subbab"
             })
             bab.belongsTo(models.matapelajaran, {
-                foreigenkey: "mata_pelajaran_id",
+                foreigenkey: "matapelajaran_id",
                 as: "matapelajaran"
             })
         }
     }
     bab.init({
-        mata_pelajaran_id: DataTypes.INTEGER,
+        matapelajaran_id: DataTypes.INTEGER,
         nama_bab: DataTypes.STRING,
         thumbnail_bab: DataTypes.TEXT
     }, {

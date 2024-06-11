@@ -2,21 +2,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('babs', {
+        await queryInterface.createTable('materis', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            mata_pelajaran_id: {
+            sub_bab_id: {
                 type: Sequelize.INTEGER
             },
-            nama_bab: {
+            nama_materi: {
                 type: Sequelize.STRING
             },
-            thumbnail_bab: {
+            thumbnail_materi: {
                 type: Sequelize.TEXT
+            },
+            tipe_materi: {
+                type: Sequelize.STRING
+            },
+            is_completed: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false,
             },
             created_at: {
                 allowNull: false,
@@ -31,6 +38,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('babs');
+        await queryInterface.dropTable('materis');
     }
 };

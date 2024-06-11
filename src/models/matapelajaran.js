@@ -12,17 +12,17 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
             matapelajaran.hasMany(models.bab, {
-                foreignKey: "mata_pelajaran_id",
+                foreignKey: "matapelajaran_id",
                 as: "bab"
             })
             matapelajaran.belongsTo(models.modepembelajaran, {
-                foreigenkey: "mode_pembelajaran_id",
+                foreigenkey: "modepembelajaran_id",
                 as: "modepembelajaran"
             })
         }
     }
     matapelajaran.init({
-        mode_pembelajaran_id: DataTypes.INTEGER,
+        modepembelajaran_id: DataTypes.INTEGER,
         nama_mata_pelajaran: DataTypes.STRING,
         thumbnail_mata_pelajaran: DataTypes.TEXT
     }, {

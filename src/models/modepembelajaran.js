@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
             modepembelajaran.hasMany(models.matapelajaran, {
-                foreigenkey: "mode_pembelajaran_id",
+                foreigenkey: "modepembelajaran_id",
                 as: "matapelajaran"
             })
             modepembelajaran.belongsTo(models.kelas, {

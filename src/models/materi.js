@@ -25,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
         sub_bab_id: DataTypes.INTEGER,
         nama_materi: DataTypes.STRING,
         thumbnail_materi: DataTypes.TEXT,
-        tipe_materi: DataTypes.STRING
+        tipe_materi: DataTypes.STRING,
+        is_completed: DataTypes.BOOLEAN
     }, {
         sequelize,
         modelName: 'materi',

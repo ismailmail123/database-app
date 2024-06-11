@@ -2,21 +2,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('progresses', {
+        await queryInterface.createTable('babs', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
-            user_id: {
+            matapelajaran_id: {
                 type: Sequelize.INTEGER
             },
-            materi_id: {
-                type: Sequelize.INTEGER
+            nama_bab: {
+                type: Sequelize.STRING
             },
-            status_progress: {
-                type: Sequelize.BOOLEAN
+            thumbnail_bab: {
+                type: Sequelize.TEXT
             },
             created_at: {
                 allowNull: false,
@@ -31,6 +31,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('progresses');
+        await queryInterface.dropTable('babs');
     }
 };

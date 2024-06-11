@@ -19,12 +19,24 @@ module.exports = (sequelize, DataTypes) => {
                 foreigenkey: "materi_id",
                 as: "materi"
             })
+            progress.belongsTo(models.bab, {
+                foreigenkey: "bab_id",
+                as: "bab"
+            })
+            progress.belongsTo(models.sub_bab, {
+                foreigenkey: "sub_bab_id",
+                as: "sub_bab"
+            })
         }
     }
     progress.init({
         user_id: DataTypes.INTEGER,
         materi_id: DataTypes.INTEGER,
-        status_progress: DataTypes.BOOLEAN
+        sub_bab_id: DataTypes.INTEGER,
+        bab_id: DataTypes.INTEGER,
+        status_progress: DataTypes.BOOLEAN,
+        xp: DataTypes.INTEGER,
+        gold: DataTypes.INTEGER
     }, {
         sequelize,
         modelName: 'progress',

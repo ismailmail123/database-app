@@ -28,8 +28,8 @@ module.exports = {
         await user.destroy({ truncate: true });
 
         await queryInterface.bulkInsert("kelas", [
-            { id: 1, name: "Kelas 1" },
-            { id: 2, name: "Kelas 2" },
+            { id: 1, nama: "Kelas 1" },
+            { id: 2, nama: "Kelas 2" },
         ]);
 
         await queryInterface.bulkInsert("modepembelajarans", [
@@ -39,16 +39,16 @@ module.exports = {
         ]);
 
         await queryInterface.bulkInsert("matapelajarans", [
-            { id: 1, mode_pembelajaran_id: 1, nama_mata_pelajaran: "BHS. Indonesia", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
-            { id: 2, mode_pembelajaran_id: 1, nama_mata_pelajaran: "Matematika", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
-            { id: 3, mode_pembelajaran_id: 1, nama_mata_pelajaran: "IPA", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
+            { id: 1, modepembelajaran_id: 1, nama_mata_pelajaran: "BHS. Indonesia", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
+            { id: 2, modepembelajaran_id: 1, nama_mata_pelajaran: "Matematika", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
+            { id: 3, modepembelajaran_id: 1, nama_mata_pelajaran: "IPA", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
         ]);
 
         await queryInterface.bulkInsert("babs", [
-            { id: 1, mata_pelajaran_id: 1, nama_bab: "bilangan 0-10", thumbnail_bab: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
-            { id: 2, mata_pelajaran_id: 1, nama_bab: "geometri dan pola", thumbnail_bab: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
-            { id: 3, mata_pelajaran_id: 1, nama_bab: "geometri dan pola 2", thumbnail_bab: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
-            { id: 4, mata_pelajaran_id: 1, nama_bab: "bilangan 21-40", thumbnail_bab: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
+            { id: 1, matapelajaran_id: 1, nama_bab: "bilangan 0-10", thumbnail_bab: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
+            { id: 2, matapelajaran_id: 1, nama_bab: "geometri dan pola", thumbnail_bab: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
+            { id: 3, matapelajaran_id: 1, nama_bab: "geometri dan pola 2", thumbnail_bab: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
+            { id: 4, matapelajaran_id: 1, nama_bab: "bilangan 21-40", thumbnail_bab: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
         ]);
 
         await queryInterface.bulkInsert("sub_babs", [
@@ -60,21 +60,21 @@ module.exports = {
 
         await queryInterface.bulkInsert("materis", [
             { id: 1, sub_bab_id: 1, nama_materi: "video", thumbnail_materi: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y", tipe_materi: "video" },
-            { id: 2, sub_bab_id: 1, nama_materi: "end quiz)", thumbnail_materi: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y", tipe_materi: "end quiz" },
-            { id: 3, sub_bab_id: 1, nama_materi: "single quiz", thumbnail_materi: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y", tipe_materi: "single quiz" },
-            { id: 4, sub_bab_id: 1, nama_materi: "summary", thumbnail_materi: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y", tipe_materi: "summary" },
+            { id: 2, sub_bab_id: 2, nama_materi: "quiz", thumbnail_materi: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y", tipe_materi: "quiz" },
+            { id: 3, sub_bab_id: 3, nama_materi: "end quiz", thumbnail_materi: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y", tipe_materi: "end quiz" },
+            { id: 4, sub_bab_id: 4, nama_materi: "summary", thumbnail_materi: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y", tipe_materi: "summary" },
         ]);
 
         await queryInterface.bulkInsert("progresses", [
-            { id: 1, user_id: 1, materi_id: 1, status_progress: true, },
-            { id: 2, user_id: 1, materi_id: 1, status_progress: true, },
-            { id: 3, user_id: 1, materi_id: 1, status_progress: true, },
-            { id: 4, user_id: 1, materi_id: 1, status_progress: true, },
+            { id: 1, user_id: 1, materi_id: 1, sub_bab_id: 1, bab_id: 1 },
+            { id: 2, user_id: 1, materi_id: 2, sub_bab_id: 2, bab_id: 1 },
+            { id: 3, user_id: 1, materi_id: 3, sub_bab_id: 3, bab_id: 1 },
+            { id: 4, user_id: 1, materi_id: 4, sub_bab_id: 4, bab_id: 1 },
         ]);
 
         await queryInterface.bulkInsert("users", [{
             id: 1,
-            name: "John Doe",
+            nama: "John Doe",
             email: "test@example.com",
             password: "$2a$12$.HOb8SlLxGN4usHDihNaQe6IFDodXO09pO6Nfi.M96XzcTJ9F1HDu",
         }, ]);
