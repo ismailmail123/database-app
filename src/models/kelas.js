@@ -15,10 +15,6 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: "kelas_id",
                 as: "modepembelajaran"
             })
-            kelas.belongsTo(models.user, {
-                foreignKey: "user_id",
-                as: "user"
-            })
         }
     }
     kelas.init({

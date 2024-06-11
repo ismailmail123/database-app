@@ -1,4 +1,4 @@
-const { bab: BabModel, progress: ProgressModel } = require("../models");
+const { bab: BabModel, sub_bab: Sub_babModel } = require("../models");
 
 /**
  * @param {import("express").Request} req
@@ -42,7 +42,7 @@ const index = async(req, res, _next) => {
                     nama_bab: b.nama_bab,
                     thumbnail_bab: b.thumbnail_bab,
                     progress_bar: b.get("progress_bar"),
-                    total_is_free: b.get("total_is_free")
+                    total_is_free: b.get("total_is_free"),
                 }
             })
         });
@@ -52,4 +52,46 @@ const index = async(req, res, _next) => {
     }
 };
 
-module.exports = { index };
+const showId = async(req, res, _next) => {
+    try {
+        const { id } = req.params;
+        const bab = await BabModel.findByPk(id, {
+            attributes: ["id", "nama_bab", "thumbnail_bab", "createdAt"],
+            include: {
+                model: Sub_babModel,
+                as: 'subbab',
+                attributes: ["id", "nama_sub_bab", "thumbnail_sub_bab"]
+            }
+        });
+
+        if (!bab) {
+            return res.status(404).send({
+                message: "Bab not found",
+                data: null,
+            });
+        }
+
+        const babData = bab.subbab && bab.subbab.length > 0 ?
+            bab.subbab.map((s) => ({
+                id: s.id,
+                nama_sub_bab: s.nama_sub_bab,
+                thumbnail_sub_bab: s.thumbnail_sub_bab,
+            })) :
+            null;
+
+        return res.send({
+            message: "Success",
+            data: {
+                id: bab.id,
+                nama_bab: bab.nama_bab,
+                daftar_sub_babs: babData,
+                createdAt: bab.createdAt,
+            },
+        });
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).send({ message: "Internal Server Error" });
+    }
+}
+
+module.exports = { index, showId };

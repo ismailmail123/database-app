@@ -12,7 +12,7 @@ const index = async(req, res, _next) => {
 
 
         const kelas = await KelasModel.findAll({
-            attributes: ["id", "nama", "created_at"],
+            attributes: ["id", "nama", "createdAt"],
             include: "modepembelajaran",
         });
 
@@ -21,10 +21,7 @@ const index = async(req, res, _next) => {
             data: kelas.map((kelas) => ({
                 id: kelas.id,
                 nama: kelas.nama,
-                modepembelajaran: {
-                    id: kelas.modepembelajaran.id,
-
-                }
+                createdAt: kelas.createdAt,
             }))
         });
     } catch (error) {
@@ -33,32 +30,7 @@ const index = async(req, res, _next) => {
     }
 };
 
-// const showId = async(req, res, _next) => {
-//     const { id } = req.params;
-//     const kelas = await KelasModel.findByPk(id, {
-//         attributes: ["id", "nama", "created_at"],
-//         include: "modepembelajaran",
 
-//     });
-//     if (!kelas) {
-//         return res.status(404).send({
-//             message: "Kelas not found",
-//             data: null,
-//         });
-//     }
-
-//     return res.send({
-//         message: "Success",
-//         data: {
-//             id: kelas.id,
-//             nama: kelas.nama,
-//             modepembelajaran: {
-//                 id: kelas.modepembelajaran.id,
-//             },
-//             created_at: kelas.created_at,
-//         },
-//     });
-// }
 const showId = async(req, res, _next) => {
     try {
         const { id } = req.params;
@@ -78,16 +50,20 @@ const showId = async(req, res, _next) => {
             });
         }
 
+        const kelasData = kelas.modepembelajaran && kelas.modepembelajaran.length > 0 ?
+            kelas.modepembelajaran.map((m) => ({
+                id: m.id,
+                nama_mode_pembelajaran: m.nama_mode_pembelajaran,
+                deskripsi_mode_pembelajaran: m.deskripsi_mode_pembelajaran,
+            })) :
+            null;
+
         return res.send({
             message: "Success",
             data: {
                 id: kelas.id,
                 nama: kelas.nama,
-                modepembelajaran: {
-                    id: kelas.modepembelajaran.id,
-                    nama_mode_pembelajaran: kelas.modepembelajaran.nama_mode_pembelajaran,
-                    deskripsi_mode_pembelajaran: kelas.modepembelajaran.deskripsi_mode_pembelajaran,
-                },
+                modepembelajaran: kelasData,
                 created_at: kelas.created_at,
             },
         });

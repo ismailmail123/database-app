@@ -2,10 +2,11 @@ const express = require("express");
 
 const router = express.Router();
 
-const { index } = require("../controllers/matapelajaran.controller")
+const { index, showId } = require("../controllers/matapelajaran.controller")
 
 // /api/babs
 router.get("/", index);
+router.get("/:id", showId);
 
 
 module.exports = router;
