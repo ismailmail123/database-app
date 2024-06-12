@@ -42,18 +42,16 @@ const showId = async(req, res, _next) => {
         const matapelajaran = await MatapelajaranModel.findByPk(id, {
             attributes: ["id", "nama_mata_pelajaran", "thumbnail_mata_pelajaran", "createdAt"],
             include: {
-                model: BabModel,
-                as: 'bab',
-                attributes: ["id", "nama_bab", "thumbnail_bab"]
+                model: ModepembelajaranModel,
+                as: 'modepembelajaran',
+                attributes: ["id", "kelas_id", "nama_mode_pembelajaran", "deskripsi_mode_pembelajaran", "createdAt"],
+                include: {
+                    model: KelasModel,
+                    as: 'kelas',
+                    attributes: ["id", "nama"]
+                },
+
             },
-        });
-        const mode = await ModepembelajaranModel.findByPk(id, {
-            attributes: ["id", "nama_mode_pembelajaran", "deskripsi_mode_pembelajaran", "createdAt"],
-            include: {
-                model: KelasModel,
-                as: 'kelas',
-                attributes: ["id", "nama"]
-            }
         });
 
         if (!matapelajaran) {
@@ -63,23 +61,19 @@ const showId = async(req, res, _next) => {
             });
         }
 
-        // const babData = matapelajaran.bab && matapelajaran.bab.length > 0 ?
-        //     matapelajaran.bab.map((b) => ({
-        //         id: b.id,
-        //         nama_bab: b.nama_bab,
-        //         thumbnail_bab: b.thumbnail_bab,
-        //     })) :
-        //     null;
+        const babData = matapelajaran.bab && matapelajaran.bab.length > 0 ?
+            matapelajaran.bab.map((b) => ({
+                id: b.id,
+                nama_bab: b.nama_bab,
+                thumbnail_bab: b.thumbnail_bab,
+            })) :
+            null;
 
         return res.send({
             message: "Success",
             data: {
-                id: matapelajaran.id,
-                nama_mata_pelajaran: matapelajaran.nama_mata_pelajaran,
-                thumbnail_mata_pelajaran: matapelajaran.thumbnail_mata_pelajaran,
-                // daftar_bab: babData,
-                createdAt: matapelajaran.createdAt,
-                modepembelajaran: mode,
+                matapelajaran,
+                daftar_bab: babData
             },
         });
     } catch (error) {
