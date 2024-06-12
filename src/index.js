@@ -6,6 +6,7 @@ const express = require("express");
 
 const app = express();
 
+const authRouter = require("./routes/auth.root")
 const progressRouter = require("./routes/progress.root")
 const materiRouter = require("./routes/materi.root")
 const sub_babRouter = require("./routes/sub_bab.root")
@@ -17,6 +18,7 @@ const matapelajaranRouter = require("./routes/matapelajaran.root")
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use("/api/auth", authRouter)
 app.use("/api/progress", progressRouter)
 app.use("/api/materis", materiRouter)
 app.use("/api/subbabs", sub_babRouter)

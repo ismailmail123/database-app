@@ -1,12 +1,12 @@
 const { bab: BabModel, sub_bab: Sub_babModel } = require("../models");
 
 /**
- * @param {import("express").Request} req
+ * @param {import("express").Request} _req
  * @param {import("express").Response} res
  * @param {import("express").NextFunction} _next
  */
 
-const index = async(req, res, _next) => {
+const index = async(_req, res, _next) => {
     try {
         // Build query to get Bab data
         const query = {

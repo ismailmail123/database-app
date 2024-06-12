@@ -32,7 +32,14 @@ const index = async(req, res, _next) => {
 
         return res.send({
             message: "Success",
-            data: materi
+            data: materi.map((m) => ({
+                id: m.id,
+                nama_materi: m.nama_materi,
+                thumbnail_materi: m.thumbnail_materi,
+                tipe_materi: m.tipe_materi,
+                is_completed: m.is_completed,
+                createdAt: m.createdAt
+            }))
         });
     } catch (error) {
         console.error("Error:", error);

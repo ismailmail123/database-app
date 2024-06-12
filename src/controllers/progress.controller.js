@@ -87,7 +87,13 @@ const update = async(req, res, _next) => {
 
         return res.send({
             message: "Progress updated successfully",
-            data: progress,
+            data: {
+                id: progress.id,
+                status_progress: progress.status_progress,
+                xp: progress.xp,
+                gold: progress.gold,
+                createdAt: progress.createdAt
+            }
         });
     } catch (error) {
         console.error(error);

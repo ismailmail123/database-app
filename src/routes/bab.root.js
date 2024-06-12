@@ -2,11 +2,12 @@ const express = require("express");
 
 const router = express.Router();
 
-const { index, showId } = require("../controllers/bab.controller")
+const { validateToken } = require("../middlewares/auth")
+const { index, showId, } = require("../controllers/bab.controller")
 
 // /api/babs
-router.get("/", index);
-router.get("/:id", showId);
+router.get("/", validateToken, index);
+router.get("/:id", validateToken, showId);
 
 
 module.exports = router;

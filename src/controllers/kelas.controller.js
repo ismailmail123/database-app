@@ -35,7 +35,7 @@ const showId = async(req, res, _next) => {
     try {
         const { id } = req.params;
         const kelas = await KelasModel.findByPk(id, {
-            attributes: ["id", "nama", "created_at"],
+            attributes: ["id", "nama", "createdAt"],
             include: {
                 model: ModepembelajaranModel,
                 as: 'modepembelajaran',
@@ -64,7 +64,7 @@ const showId = async(req, res, _next) => {
                 id: kelas.id,
                 nama: kelas.nama,
                 modepembelajaran: kelasData,
-                created_at: kelas.created_at,
+                createdAt: kelas.createdAt,
             },
         });
     } catch (error) {
