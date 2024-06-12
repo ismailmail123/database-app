@@ -1,5 +1,4 @@
 const { modepembelajaran: ModepembelajaranModel, matapelajaran: MatapelajaranModel } = require("../models");
-const matapelajaran = require("../models/matapelajaran");
 
 /**
  * @param {import("express").Request} req
@@ -9,9 +8,6 @@ const matapelajaran = require("../models/matapelajaran");
 
 const index = async(req, res, _next) => {
     try {
-        // Build query to get Bab data
-
-
         const modepembelajaran = await ModepembelajaranModel.findAll();
 
         return res.send({

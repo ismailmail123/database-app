@@ -8,9 +8,6 @@ const { kelas: KelasModel, modepembelajaran: ModepembelajaranModel } = require("
 
 const index = async(req, res, _next) => {
     try {
-        // Build query to get Bab data
-
-
         const kelas = await KelasModel.findAll({
             attributes: ["id", "nama", "createdAt"],
             include: "modepembelajaran",

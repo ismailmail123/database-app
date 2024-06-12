@@ -36,15 +36,17 @@ const index = async(_req, res, _next) => {
 
         return res.send({
             message: "Success",
-            data: bab.map((b) => {
-                return {
-                    id: b.id,
-                    nama_bab: b.nama_bab,
-                    thumbnail_bab: b.thumbnail_bab,
-                    progress_bar: b.get("progress_bar"),
-                    total_is_free: b.get("total_is_free"),
-                }
-            })
+            data: bab
+                .map((b) => {
+                    return {
+                        id: b.id,
+                        matapelajaran_id: b.matapelajaran_id,
+                        nama_bab: b.nama_bab,
+                        thumbnail_bab: b.thumbnail_bab,
+                        progress_bar: b.get("progress_bar"),
+                        total_is_free: b.get("total_is_free"),
+                    }
+                })
         });
     } catch (error) {
         console.error("Error:", error);
@@ -60,7 +62,7 @@ const showId = async(req, res, _next) => {
             include: {
                 model: Sub_babModel,
                 as: 'subbab',
-                attributes: ["id", "nama_sub_bab", "thumbnail_sub_bab"]
+                attributes: ["id", "nama_sub_bab", "thumbnail_sub_bab", "is_free", ]
             }
         });
 
@@ -76,6 +78,8 @@ const showId = async(req, res, _next) => {
                 id: s.id,
                 nama_sub_bab: s.nama_sub_bab,
                 thumbnail_sub_bab: s.thumbnail_sub_bab,
+                is_free: s.is_free,
+                progress_bar: s.progress_bar
             })) :
             null;
 

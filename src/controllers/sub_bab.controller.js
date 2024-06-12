@@ -8,7 +8,6 @@ const { sub_bab: Sub_babModel, progress: ProgressModel } = require("../models");
 
 const index = async(req, res, _next) => {
     try {
-        // Build query to get sub_bab data
         const query = {
             attributes: {
                 include: [
@@ -32,6 +31,7 @@ const index = async(req, res, _next) => {
             data: sub_bab.map((s) => {
                 return {
                     id: s.id,
+                    bab_id: s.bab_id,
                     nama_sub_bab: s.nama_sub_bab,
                     thumbnail_sub_bab: s.thumbnail_sub_bab,
                     is_free: s.is_free,
@@ -44,5 +44,4 @@ const index = async(req, res, _next) => {
         return res.status(500).send({ message: "Internal Server Error" });
     }
 };
-
 module.exports = { index };

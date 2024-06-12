@@ -9,7 +9,6 @@ const { materi: MateriModel } = require("../models");
 
 const index = async(req, res, next) => {
     try {
-        // Build query to get progress data
         const progress = await ProgressModel.findAll();
 
         return res.send({

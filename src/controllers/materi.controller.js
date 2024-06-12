@@ -8,7 +8,6 @@ const { materi: MateriModel } = require("../models");
 
 const index = async(req, res, _next) => {
     try {
-        // Build query to get materi data
         const query = {
             attributes: {
                 include: [
@@ -34,6 +33,7 @@ const index = async(req, res, _next) => {
             message: "Success",
             data: materi.map((m) => ({
                 id: m.id,
+                sub_bab_id: m.sub_bab_id,
                 nama_materi: m.nama_materi,
                 thumbnail_materi: m.thumbnail_materi,
                 tipe_materi: m.tipe_materi,
