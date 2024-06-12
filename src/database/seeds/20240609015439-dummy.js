@@ -39,9 +39,9 @@ module.exports = {
         ]);
 
         await queryInterface.bulkInsert("matapelajarans", [
-            { id: 1, modepembelajaran_id: 1, nama_mata_pelajaran: "BHS. Indonesia", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
-            { id: 2, modepembelajaran_id: 1, nama_mata_pelajaran: "Matematika", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
-            { id: 3, modepembelajaran_id: 1, nama_mata_pelajaran: "IPA", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
+            { id: 1, kelas_id: 1, modepembelajaran_id: 1, nama_mata_pelajaran: "Matematika", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
+            { id: 2, kelas_id: 1, modepembelajaran_id: 1, nama_mata_pelajaran: "BHS. Indonesia", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
+            { id: 3, kelas_id: 1, modepembelajaran_id: 1, nama_mata_pelajaran: "IPA", thumbnail_mata_pelajaran: "https://youtu.be/sSLJx5t4OJ4?si=3JaC9WO0zuKfBV3Y" },
         ]);
 
         await queryInterface.bulkInsert("babs", [

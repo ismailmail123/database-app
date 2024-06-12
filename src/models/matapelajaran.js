@@ -19,9 +19,14 @@ module.exports = (sequelize, DataTypes) => {
                 foreigenkey: "modepembelajaran_id",
                 as: "modepembelajaran"
             })
+            matapelajaran.belongsTo(models.kelas, {
+                foreigenkey: "kelas_id",
+                as: "kelas"
+            })
         }
     }
     matapelajaran.init({
+        kelas_id: DataTypes.INTEGER,
         modepembelajaran_id: DataTypes.INTEGER,
         nama_mata_pelajaran: DataTypes.STRING,
         thumbnail_mata_pelajaran: DataTypes.TEXT

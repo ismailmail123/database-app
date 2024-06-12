@@ -14,16 +14,17 @@ const index = async(req, res, next) => {
 
         return res.send({
             message: "Success",
-            data: progress.map((p) => {
+            data: progress
+                .map((p) => {
 
-                return {
-                    id: p.id,
-                    materi_id: p.materi_id,
-                    status_progress: p.status_progress,
-                    xp: p.xp,
-                    gold: p.gold,
-                };
-            }),
+                    return {
+                        id: p.id,
+                        materi_id: p.materi_id,
+                        status_progress: p.status_progress,
+                        xp: p.xp,
+                        gold: p.gold,
+                    };
+                }),
         });
     } catch (error) {
         console.error("Error:", error);

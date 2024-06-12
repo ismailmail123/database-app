@@ -1,4 +1,5 @@
-const { matapelajaran: MatapelajaranModel, bab: BabModel } = require("../models");
+const { kelas: KelasModel, modepembelajaran: ModepembelajaranModel, matapelajaran: MatapelajaranModel, bab: BabModel } = require("../models");
+const modepembelajaran = require("../models/modepembelajaran");
 
 /**
  * @param {import("express").Request} req
@@ -12,18 +13,21 @@ const index = async(req, res, _next) => {
 
 
         const matapelajaran = await MatapelajaranModel.findAll({
-            attributes: ["id", "nama_mata-pelajaran", "thumbnail_mata_pelajaran", "createdAt"],
-            include: "bab",
+            // attributes: ["id", "nama_mata-pelajaran", "thumbnail_mata_pelajaran", "createdAt"],
+            // include: "bab",
         });
 
         return res.send({
             message: "Success",
-            data: matapelajaran.map((matapelajaran) => ({
-                id: matapelajaran.id,
-                nama_mata_pelajaran: matapelajaran.nama_mata_pelajaran,
-                thumbnail_mata_pelajaran: matapelajaran.thumbnail_mata_pelajaran,
-                createdAt: matapelajaran.createdAt,
-            }))
+            data: matapelajaran
+                .map((matapelajaran) => ({
+                    id: matapelajaran.id,
+                    nama_mata_pelajaran: matapelajaran.nama_mata_pelajaran,
+                    thumbnail_mata_pelajaran: matapelajaran.thumbnail_mata_pelajaran,
+                    createdAt: matapelajaran.createdAt,
+                    kelas_id: matapelajaran.kelas_id,
+                    modepembelajaran_id: matapelajaran.modepembelajaran_id,
+                }))
         });
     } catch (error) {
         console.error("Error:", error);
@@ -41,6 +45,14 @@ const showId = async(req, res, _next) => {
                 model: BabModel,
                 as: 'bab',
                 attributes: ["id", "nama_bab", "thumbnail_bab"]
+            },
+        });
+        const mode = await ModepembelajaranModel.findByPk(id, {
+            attributes: ["id", "nama_mode_pembelajaran", "deskripsi_mode_pembelajaran", "createdAt"],
+            include: {
+                model: KelasModel,
+                as: 'kelas',
+                attributes: ["id", "nama"]
             }
         });
 
@@ -51,21 +63,23 @@ const showId = async(req, res, _next) => {
             });
         }
 
-        const babData = matapelajaran.bab && matapelajaran.bab.length > 0 ?
-            matapelajaran.bab.map((b) => ({
-                id: b.id,
-                nama_bab: b.nama_bab,
-                thumbnail_bab: b.thumbnail_bab,
-            })) :
-            null;
+        // const babData = matapelajaran.bab && matapelajaran.bab.length > 0 ?
+        //     matapelajaran.bab.map((b) => ({
+        //         id: b.id,
+        //         nama_bab: b.nama_bab,
+        //         thumbnail_bab: b.thumbnail_bab,
+        //     })) :
+        //     null;
 
         return res.send({
             message: "Success",
             data: {
                 id: matapelajaran.id,
                 nama_mata_pelajaran: matapelajaran.nama_mata_pelajaran,
-                daftar_bab: babData,
+                thumbnail_mata_pelajaran: matapelajaran.thumbnail_mata_pelajaran,
+                // daftar_bab: babData,
                 createdAt: matapelajaran.createdAt,
+                modepembelajaran: mode,
             },
         });
     } catch (error) {
