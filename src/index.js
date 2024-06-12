@@ -6,6 +6,7 @@ const express = require("express");
 
 const app = express();
 
+const { cors } = require("./middlewares/cors")
 const authRouter = require("./routes/auth.root")
 const progressRouter = require("./routes/progress.root")
 const materiRouter = require("./routes/materi.root")
@@ -17,6 +18,14 @@ const matapelajaranRouter = require("./routes/matapelajaran.root")
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors);
+
+if (!process.env.JWT_SECRET) {
+    console.error(
+        "JWT_SECRET is not provided, fill it with random string or generate it using 'openssl rand -base64/-hex 32'"
+    );
+    process.exit(1);
+}
 
 app.use("/api/auth", authRouter)
 app.use("/api/progress", progressRouter)
